@@ -42,7 +42,7 @@ limitations under the License.
                 libs:angle="270"
                 libs:colors="@array/tint_layout_colors">
 
-                <com.gigamole.tintlayout.lib.AgencyTextView
+                <com.gigamole.tintlayout.AgencyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -106,7 +106,7 @@ limitations under the License.
                 libs:angle="90"
                 libs:colors="@array/tint_layout_colors">
 
-                <com.gigamole.tintlayout.lib.AgencyTextView
+                <com.gigamole.tintlayout.AgencyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -129,7 +129,7 @@ limitations under the License.
     <!--android:background="@drawable/circle"-->
     <!--libs:colors="@array/tint_layout_colors">-->
 
-    <!--<com.gigamole.tintlayout.lib.AgencyTextView-->
+    <!--<com.gigamole.tintlayout.AgencyTextView-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="wrap_content"-->
     <!--android:layout_gravity="center"-->

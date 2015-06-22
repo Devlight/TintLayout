@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.gigamole.tintlayout.lib;
+package com.gigamole.tintlayout;
 
 import android.content.Context;
 import android.graphics.Typeface;

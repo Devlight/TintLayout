@@ -19,8 +19,4 @@ limitations under the License.
         <attr name="colors" format="reference" />
         <attr name="angle" format="float" />
     </declare-styleable>
-
-    <declare-styleable name="AgencyTextView">
-        <attr name="agencyFont" format="string" />
-    </declare-styleable>
 </resources>
