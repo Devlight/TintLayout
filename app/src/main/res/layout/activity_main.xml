@@ -122,22 +122,22 @@ limitations under the License.
     </LinearLayout>
 
     <!--<com.gigamole.tintlayout.lib.TintLayout-->
-    <!--android:id="@+id/tint_layout"-->
-    <!--android:layout_width="300dp"-->
-    <!--android:layout_height="300dp"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:background="@drawable/circle"-->
-    <!--libs:colors="@array/tint_layout_colors">-->
+        <!--android:id="@+id/tint_layout"-->
+        <!--android:layout_width="300dp"-->
+        <!--android:layout_height="300dp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:background="@drawable/circle"-->
+        <!--libs:colors="@array/tint_layout_colors">-->
 
-    <!--<com.gigamole.tintlayout.AgencyTextView-->
-    <!--android:layout_width="match_parent"-->
-    <!--android:layout_height="wrap_content"-->
-    <!--android:layout_gravity="center"-->
-    <!--android:gravity="center"-->
-    <!--android:text="@string/tint_layout_title"-->
-    <!--android:textColor="@color/white"-->
-    <!--android:textSize="50sp"-->
-    <!--libs:agencyFont="agency_bold" />-->
+        <!--<com.gigamole.tintlayout.AgencyTextView-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_gravity="center"-->
+            <!--android:gravity="center"-->
+            <!--android:text="@string/tint_layout_title"-->
+            <!--android:textColor="@color/white"-->
+            <!--android:textSize="50sp"-->
+            <!--libs:agencyFont="agency_bold" />-->
 
     <!--</com.gigamole.tintlayout.lib.TintLayout>-->
 
