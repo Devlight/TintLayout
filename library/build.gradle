@@ -18,14 +18,13 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            zipAlignEnabled true
         }
     }
 }
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
-    compile 'org.jsoup:jsoup:1.8.1'
+    compile 'org.jsoup:jsoup:+'
 }
 
 def siteUrl = 'https://github.com/GIGAMOLE/TintLayout'
