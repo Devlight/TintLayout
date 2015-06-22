@@ -38,7 +38,7 @@ Or Maven:
 
 Android SDK Version
 =========
-SlideImageView requires a minimum sdk version of 11.
+TintLayout requires a minimum sdk version of 11.
 
 Sample
 ========
