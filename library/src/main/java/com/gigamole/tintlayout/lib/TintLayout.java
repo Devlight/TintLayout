@@ -61,7 +61,6 @@ public class TintLayout extends FrameLayout {
     private Canvas tintCanvas;
     private Bitmap tintBitmap;
 
-    private View child;
     private int childLeft;
     private int childTop;
 
@@ -81,12 +80,14 @@ public class TintLayout extends FrameLayout {
         {
             setDither(true);
             setAntiAlias(true);
+            setFilterBitmap(true);
             setXfermode(porterDuffXfermode);
         }
     };
 
     private Paint ditherPaint = new Paint(Paint.ANTI_ALIAS_FLAG) {
         {
+            setFilterBitmap(true);
             setDither(true);
             setAntiAlias(true);
         }
@@ -175,9 +176,9 @@ public class TintLayout extends FrameLayout {
                 this.canvas.drawColor(this.colors[0], PorterDuff.Mode.SRC_IN);
             } else {
                 final Shader shader = new RadialGradient(
-                        (float) this.radius,
-                        (float) this.radius,
-                        (float) this.radius * 1.35f,
+                        (float) this.width / 2,
+                        (float) this.height / 2,
+                        (float) Math.sqrt(this.width * this.width + this.height * this.height) / 2,
                         this.colors,
                         null,
                         Shader.TileMode.CLAMP
@@ -257,19 +258,19 @@ public class TintLayout extends FrameLayout {
     }
 
     private void getChildBitmap() {
-        this.child = getChildAt(0);
-        ((LayoutParams) this.child.getLayoutParams()).gravity = Gravity.CENTER;
+        final View child = getChildAt(0);
+        ((LayoutParams) child.getLayoutParams()).gravity = Gravity.CENTER;
 
-        this.childLeft = this.child.getLeft();
-        this.childTop = this.child.getTop();
+        this.childLeft = child.getLeft();
+        this.childTop = child.getTop();
 
-        this.childWidth = this.child.getRight() - this.childLeft;
-        this.childHeight = this.child.getBottom() - this.childTop;
+        this.childWidth = child.getRight() - this.childLeft;
+        this.childHeight = child.getBottom() - this.childTop;
 
-        this.child.setDrawingCacheEnabled(true);
-        this.child.buildDrawingCache();
-        this.childBitmap = Bitmap.createBitmap(this.child.getDrawingCache());
-        this.child.setDrawingCacheEnabled(false);
+        child.setDrawingCacheEnabled(true);
+        child.buildDrawingCache();
+        this.childBitmap = Bitmap.createBitmap(child.getDrawingCache());
+        child.setDrawingCacheEnabled(false);
 
         this.isChildGet = true;
     }
