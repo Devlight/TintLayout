@@ -16,6 +16,7 @@
 
 package com.gigamole.tintlayout.lib;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
 import android.graphics.Bitmap;
@@ -29,10 +30,16 @@ import android.graphics.Rect;
 import android.graphics.Shader;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.FrameLayout;
+
+import java.io.File;
+import java.io.RandomAccessFile;
+import java.nio.MappedByteBuffer;
+import java.nio.channels.FileChannel;
 
 /**
  * Created by GIGAMOLE on 21.06.2015.
@@ -251,7 +258,7 @@ public class TintLayout extends FrameLayout {
     }
 
     private void getBitmap() {
-        this.bitmap = Bitmap.createBitmap(drawableToBitmap(getBackground()));
+        this.bitmap = Bitmap.createBitmap(convertToMutable(drawableToBitmap(getBackground())));
         this.canvas = new Canvas(this.bitmap);
 
         this.isGet = true;
@@ -293,5 +300,41 @@ public class TintLayout extends FrameLayout {
         drawable.draw(canvas);
 
         return bitmap;
+    }
+
+    @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
+    private Bitmap convertToMutable(final Bitmap imgIn) {
+        final int width = imgIn.getWidth(), height = imgIn.getHeight();
+        final Bitmap.Config type = imgIn.getConfig();
+
+        File outputFile = null;
+        final File outputDir = getContext().getCacheDir();
+        try {
+            outputFile = File.createTempFile(Long.toString(System.currentTimeMillis()), null, outputDir);
+            outputFile.deleteOnExit();
+
+            final RandomAccessFile randomAccessFile = new RandomAccessFile(outputFile, "rw");
+            final FileChannel channel = randomAccessFile.getChannel();
+            final MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, imgIn.getRowBytes() * height);
+
+            imgIn.copyPixelsToBuffer(map);
+//            imgIn.recycle();
+
+            final Bitmap result = Bitmap.createBitmap(width, height, type);
+
+            map.position(0);
+            result.copyPixelsFromBuffer(map);
+
+            channel.close();
+            randomAccessFile.close();
+
+            outputFile.delete();
+            return result;
+        } catch (final Exception e) {
+        } finally {
+            if (outputFile != null)
+                outputFile.delete();
+        }
+        return null;
     }
 }
