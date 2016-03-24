@@ -15,29 +15,33 @@ You can download a .jar from GitHub's [releases page](https://github.com/GIGAMOL
 
 Or use Gradle jCenter:
 
-    dependencies {
-        repositories {
-            mavenCentral()
-            maven {
-                url  'http://dl.bintray.com/gigamole/maven/'
-            }
+```groovy
+dependencies {
+    repositories {
+        mavenCentral()
+        maven {
+            url  'http://dl.bintray.com/gigamole/maven/'
         }
-        compile 'com.github.gigamole.tintlayout:library:+'
     }
+    compile 'com.github.gigamole.tintlayout:library:+'
+}
+```
 
 Or Gradle Maven Central:
 
-    compile 'com.github.gigamole.tintlayout:library:1.0.2'
+```groovy
+compile 'com.github.gigamole.tintlayout:library:1.0.2'
+```
 
 Or Maven:
-
-    <dependency>
-	    <groupId>com.github.gigamole.tintlayout</groupId>
-	    <artifactId>library</artifactId>
-	    <version>1.0.2</version>
-	    <type>aar</type>
-    </dependency>
-
+```xml
+<dependency>
+    <groupId>com.github.gigamole.tintlayout</groupId>
+    <artifactId>library</artifactId>
+    <version>1.0.2</version>
+    <type>aar</type>
+</dependency>
+```
 Android SDK Version
 =========
 TintLayout requires a minimum sdk version of 11.
@@ -62,31 +66,34 @@ The angle can only be positive and be in range from 0 to 360.
 
 Check out in code init:
 
-    final TintLayout tintLayout = (TintLayout) findViewById(R.id.tint_layout);
-    tintLayout.setAngle(145);
+```java
+final TintLayout tintLayout = (TintLayout) findViewById(R.id.tint_layout);
+tintLayout.setAngle(145);
+```
 
 And XML init:
+```xml
+<com.gigamole.tintlayout.lib.TintLayout
+    android:id="@+id/tint_layout"
+    android:layout_width="300dp"
+    android:layout_height="300dp"
+    android:layout_gravity="center"
+    android:background="@drawable/circle"
+    libs:colors="@array/tint_layout_colors">
 
-    <com.gigamole.tintlayout.lib.TintLayout
-        android:id="@+id/tint_layout"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
+    <com.gigamole.tintlayout.AgencyTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@drawable/circle"
-        libs:colors="@array/tint_layout_colors">
+        android:gravity="center"
+        android:text="@string/tint_layout_title"
+        android:textColor="@color/white"
+        android:textSize="50sp"
+        libs:agencyFont="agency_bold" />
 
-        <com.gigamole.tintlayout.AgencyTextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:text="@string/tint_layout_title"
-            android:textColor="@color/white"
-            android:textSize="50sp"
-            libs:agencyFont="agency_bold" />
+</com.gigamole.tintlayout.lib.TintLayout>
+```
 
-    </com.gigamole.tintlayout.lib.TintLayout>
-    
 If you want to look at circular tint animation just remove comment block in sample from XML and MainActivity.
 
 Getting Help
