@@ -28,7 +28,7 @@ import java.util.Locale;
  */
 public class AgencyTextView extends TextView {
 
-    private static final String SCHEME ="http://schemas.android.com/apk/res-auto";
+    private static final String SCHEME = "http://schemas.android.com/apk/res-auto";
     private static final String ATTRIBUTE = "agencyFont";
 
     static enum AgencyFont {

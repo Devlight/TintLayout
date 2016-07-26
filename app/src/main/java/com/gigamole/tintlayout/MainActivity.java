@@ -19,13 +19,12 @@ package com.gigamole.tintlayout;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.os.Handler;
 
 
 public class MainActivity extends Activity {
 
-    private double i;
-    private final Handler handler = new Handler();
+//    private double i;
+//    private final Handler handler = new Handler();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

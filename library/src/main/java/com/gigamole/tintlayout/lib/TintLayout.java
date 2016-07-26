@@ -16,6 +16,7 @@
 
 package com.gigamole.tintlayout.lib;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.TypedArray;
@@ -52,9 +53,6 @@ public class TintLayout extends FrameLayout {
     private int width;
     private int height;
     private double radius;
-
-    private double x;
-    private double y;
 
     private double xOffset;
     private double yOffset;
@@ -174,6 +172,7 @@ public class TintLayout extends FrameLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
     }
 
+    @SuppressLint("DrawAllocation")
     @Override
     protected void onDraw(Canvas canvas) {
         if (this.isGet && this.isChildGet && this.isTintGet) {
@@ -230,11 +229,11 @@ public class TintLayout extends FrameLayout {
         this.left = (float) this.childLeft;
         this.top = (float) this.childTop;
 
-        this.x = this.left + Math.cos(angle * Math.PI / 180) * this.radius;
-        this.y = this.top + Math.sin(angle * Math.PI / 180) * this.radius;
+        final double x = this.left + Math.cos(angle * Math.PI / 180) * this.radius;
+        final double y = this.top + Math.sin(angle * Math.PI / 180) * this.radius;
 
-        this.xOffset = (this.x - this.left) / this.radius;
-        this.yOffset = (this.y - this.top) / this.radius;
+        this.xOffset = (x - this.left) / this.radius;
+        this.yOffset = (y - this.top) / this.radius;
 
         if (this.angle >= 0 && this.angle < 90) {
             while (this.left < this.width && this.top < this.height) {
@@ -302,9 +301,11 @@ public class TintLayout extends FrameLayout {
         return bitmap;
     }
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @TargetApi(Build.VERSION_CODES.ICE_CREAM_SANDWICH)
     private Bitmap convertToMutable(final Bitmap imgIn) {
-        final int width = imgIn.getWidth(), height = imgIn.getHeight();
+        final int width = imgIn.getWidth();
+        final int height = imgIn.getHeight();
         final Bitmap.Config type = imgIn.getConfig();
 
         File outputFile = null;
@@ -318,7 +319,6 @@ public class TintLayout extends FrameLayout {
             final MappedByteBuffer map = channel.map(FileChannel.MapMode.READ_WRITE, 0, imgIn.getRowBytes() * height);
 
             imgIn.copyPixelsToBuffer(map);
-//            imgIn.recycle();
 
             final Bitmap result = Bitmap.createBitmap(width, height, type);
 
@@ -331,6 +331,7 @@ public class TintLayout extends FrameLayout {
             outputFile.delete();
             return result;
         } catch (final Exception e) {
+            e.printStackTrace();
         } finally {
             if (outputFile != null)
                 outputFile.delete();
