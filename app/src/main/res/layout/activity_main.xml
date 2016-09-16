@@ -13,12 +13,10 @@ limitations under the License.
 
 
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:libs="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_gravity="center"
-    tools:context=".MainActivity">
+    android:layout_gravity="center">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -33,16 +31,16 @@ limitations under the License.
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.gigamole.tintlayout.lib.TintLayout
+            <devlight.io.library.TintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:background="@color/background_start"
-                libs:angle="270"
-                libs:colors="@array/tint_layout_colors">
+                app:tl_angle="270"
+                app:tl_colors="@array/tint_layout_colors">
 
-                <com.gigamole.tintlayout.AgencyTextView
+                <devlight.io.sample.AgencyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -50,18 +48,18 @@ limitations under the License.
                     android:text="@string/tint_title"
                     android:textColor="@color/white"
                     android:textSize="55sp"
-                    libs:agencyFont="agency_bold" />
+                    app:agencyFont="agency_bold" />
 
-            </com.gigamole.tintlayout.lib.TintLayout>
+            </devlight.io.library.TintLayout>
 
-            <com.gigamole.tintlayout.lib.TintLayout
+            <devlight.io.library.TintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:background="@color/background_end"
-                libs:angle="0"
-                libs:colors="@array/tint_layout_colors">
+                app:tl_angle="0"
+                app:tl_colors="@array/tint_layout_colors">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -69,7 +67,7 @@ limitations under the License.
                     android:layout_gravity="center"
                     android:src="@drawable/src" />
 
-            </com.gigamole.tintlayout.lib.TintLayout>
+            </devlight.io.library.TintLayout>
 
         </LinearLayout>
 
@@ -80,14 +78,14 @@ limitations under the License.
             android:orientation="horizontal"
             android:weightSum="2">
 
-            <com.gigamole.tintlayout.lib.TintLayout
+            <devlight.io.library.TintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:background="@color/background_end"
-                libs:angle="180"
-                libs:colors="@array/tint_layout_colors">
+                app:tl_angle="180"
+                app:tl_colors="@array/tint_layout_colors">
 
                 <ImageView
                     android:layout_width="wrap_content"
@@ -95,18 +93,18 @@ limitations under the License.
                     android:layout_gravity="center"
                     android:src="@drawable/src" />
 
-            </com.gigamole.tintlayout.lib.TintLayout>
+            </devlight.io.library.TintLayout>
 
-            <com.gigamole.tintlayout.lib.TintLayout
+            <devlight.io.library.TintLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_centerInParent="true"
                 android:layout_weight="1"
                 android:background="@color/background_start"
-                libs:angle="90"
-                libs:colors="@array/tint_layout_colors">
+                app:tl_angle="90"
+                app:tl_colors="@array/tint_layout_colors">
 
-                <com.gigamole.tintlayout.AgencyTextView
+                <devlight.io.sample.AgencyTextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
@@ -114,22 +112,22 @@ limitations under the License.
                     android:text="@string/layout_title"
                     android:textColor="@color/white"
                     android:textSize="55sp"
-                    libs:agencyFont="agency_bold" />
+                    app:agencyFont="agency_bold" />
 
-            </com.gigamole.tintlayout.lib.TintLayout>
+            </devlight.io.library.TintLayout>
 
         </LinearLayout>
     </LinearLayout>
 
-    <!--<com.gigamole.tintlayout.lib.TintLayout-->
+    <!--<devlight.io.library.TintLayout-->
         <!--android:id="@+id/tint_layout"-->
         <!--android:layout_width="300dp"-->
         <!--android:layout_height="300dp"-->
         <!--android:layout_gravity="center"-->
         <!--android:background="@drawable/circle"-->
-        <!--libs:colors="@array/tint_layout_colors">-->
+        <!--app:tl_colors="@array/tint_layout_colors">-->
 
-        <!--<com.gigamole.tintlayout.AgencyTextView-->
+        <!--<devlight.io.sample.AgencyTextView-->
             <!--android:layout_width="match_parent"-->
             <!--android:layout_height="wrap_content"-->
             <!--android:layout_gravity="center"-->
@@ -137,8 +135,8 @@ limitations under the License.
             <!--android:text="@string/tint_layout_title"-->
             <!--android:textColor="@color/white"-->
             <!--android:textSize="50sp"-->
-            <!--libs:agencyFont="agency_bold" />-->
+            <!--app:agencyFont="agency_bold" />-->
 
-    <!--</com.gigamole.tintlayout.lib.TintLayout>-->
+    <!--</devlight.io.library.TintLayout>-->
 
 </FrameLayout>
