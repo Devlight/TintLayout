@@ -21,8 +21,6 @@ This library help you to achieve popular tint effect from view.
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 [![Codacy](https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScSHhmckZyeGJDcXc)](https://www.codacy.com/app/gigamole53/TintLayout?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=DevLight-Mobile-Agency/TintLayout&amp;utm_campaign=Badge_Grade)
 
-<br/>
-
 <p align="center">
     <img src="https://drive.google.com/uc?export=download&id=0BxPO_UeS7wScQTl2QUNMa2thdzg"/>
 </p>
@@ -68,7 +66,7 @@ Sample
 
 You can set such parameters as:
 
-- color:  
+ - color:  
     allows you to set solid color.
     
  - colors:  
