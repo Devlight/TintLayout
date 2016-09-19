@@ -24,6 +24,7 @@ limitations under the License.
         android:theme="@style/AppTheme" >
         <activity
             android:name="devlight.io.sample.MainActivity"
+            android:screenOrientation="reverseLandscape"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

@@ -22,8 +22,10 @@ import android.content.res.TypedArray;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.LinearGradient;
 import android.graphics.Paint;
-import android.graphics.RadialGradient;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.support.annotation.FloatRange;
@@ -41,6 +43,7 @@ public class TintLayout extends FrameLayout {
     private final static int FLAGS =
             Paint.ANTI_ALIAS_FLAG | Paint.DITHER_FLAG | Paint.FILTER_BITMAP_FLAG;
 
+    // Default values
     private final static float DEFAULT_ANGLE = 45.0F;
     private final static int DEFAULT_COLOR = Color.LTGRAY;
 
@@ -48,30 +51,37 @@ public class TintLayout extends FrameLayout {
     private final static float MAX_ANGLE = 360.0F;
     private final static float MIN_ANGLE = 0.0F;
 
+    // Bounds info
     private final RectF mBounds = new RectF();
     private final RectF mChildBounds = new RectF();
 
-    private Paint mColorPaint = new Paint(FLAGS);
-
-    private final Canvas mCanvas = new Canvas();
-    private Bitmap mBitmap;
-
+    // Tint color paint
+    private Paint mColorPaint = new Paint(FLAGS) {
+        {
+            setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        }
+    };
+    // Tint canvas
     private final Canvas mTintCanvas = new Canvas();
     private Bitmap mTintBitmap;
+    // Child bitmap(screenshot)
     private Bitmap mChildBitmap;
 
+    // Counter for draw offset
     private float mLeftCounter;
     private float mTopCounter;
-
+    // Draw offset by angle
     private float mOffsetX;
     private float mOffsetY;
+    // Radius relative to bigger side
     private float mRadius;
 
+    // Tint angle
     private float mAngle;
+    // Tint gradient colors
     private int[] mColors;
+    // Tint solid color
     private int mColor;
-
-    private Shader mTintGradient;
 
     public TintLayout(Context context) {
         this(context, null);
@@ -93,8 +103,23 @@ public class TintLayout extends FrameLayout {
             setAngle(typedArray.getFloat(R.styleable.TintLayout_tl_angle, DEFAULT_ANGLE));
             setColor(typedArray.getColor(R.styleable.TintLayout_tl_color, DEFAULT_COLOR));
 
-            final int colorsId = typedArray.getResourceId(R.styleable.TintLayout_tl_colors, 0);
-            setColors(colorsId == 0 ? null : getResources().getIntArray(colorsId));
+            // Retrieve colors
+            String[] stringColors = null;
+            try {
+                final int colorsId = typedArray.getResourceId(R.styleable.TintLayout_tl_colors, 0);
+                stringColors = colorsId == 0 ? null : getResources().getStringArray(colorsId);
+            } catch (Exception exception) {
+                stringColors = null;
+                exception.printStackTrace();
+            } finally {
+                if (stringColors == null) setColors(null);
+                else {
+                    final int[] colors = new int[stringColors.length];
+                    for (int i = 0; i < stringColors.length; i++)
+                        colors[i] = Color.parseColor(stringColors[i]);
+                    setColors(colors);
+                }
+            }
         } finally {
             typedArray.recycle();
         }
@@ -132,21 +157,14 @@ public class TintLayout extends FrameLayout {
         super.onMeasure(widthMeasureSpec, heightMeasureSpec);
         mBounds.set(0.0F, 0.0F, getMeasuredWidth(), getMeasuredHeight());
 
-        mBitmap = Bitmap.createBitmap(
-                (int) mBounds.width(), (int) mBounds.height(), Bitmap.Config.ARGB_8888
-        );
-        mCanvas.setBitmap(mBitmap);
-
+        // Set tint canvas
         mTintBitmap = Bitmap.createBitmap(
                 (int) mBounds.width(), (int) mBounds.height(), Bitmap.Config.ARGB_8888
         );
-        mCanvas.setBitmap(mTintBitmap);
+        mTintCanvas.setBitmap(mTintBitmap);
 
+        // Calculate radius
         mRadius = mBounds.width() > mBounds.height() ? mBounds.centerX() : mBounds.centerY();
-        mTintGradient = new RadialGradient(
-                mBounds.centerX(), mBounds.centerY(), mRadius, mColors, null, Shader.TileMode.CLAMP
-        );
-        mColorPaint.setShader(mTintGradient);
     }
 
     @SuppressLint("DrawAllocation")
@@ -155,36 +173,12 @@ public class TintLayout extends FrameLayout {
         super.onDraw(canvas);
 
         // Check for availability
-//        if (mTintBitmap == null || mChildBitmap == null) return;
+        if (mTintBitmap == null || mChildBitmap == null) return;
 
-//        mCanvas.drawRect(mBounds, mColorPaint);
-//        mCanvas.drawBitmap(mTintBitmap, 0.0F, 0.0F, mTintPaint);
-
-//        mTintCanvas.drawRect(mBounds, );
-
+        // Fill tint with color
+        mTintCanvas.drawRect(mBounds, mColorPaint);
+        // Draw tint
         canvas.drawBitmap(mTintBitmap, 0.0F, 0.0F, null);
-
-//        if (this.mColors.length == 1) {
-//            this.mCanvas.drawColor(this.mColors[0], PorterDuff.Mode.SRC_IN);
-//        } else {
-//
-//
-//            this.mColorPaint.setShader(shader);
-//            this.mColorPaint.setXfermode(this.porterDuffXfermode);
-//
-//            this.mCanvas.drawRect(new Rect(
-//                            0,
-//                            0,
-//                            this.width,
-//                            this.height),
-//                    this.mColorPaint
-//            );
-//
-//            this.mColorPaint.setShader(null);
-//            this.mColorPaint.setXfermode(null);
-//        }
-//
-//        canvas.drawBitmap(this.mBitmap, this.matrix, null);
     }
 
     //
@@ -216,17 +210,21 @@ public class TintLayout extends FrameLayout {
     }
 
     public void invalidateTint() {
-//        mTintCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
+        // Clear previous tint
+        mTintCanvas.drawColor(0, PorterDuff.Mode.CLEAR);
 
-        final float x = (float) (mChildBounds.left + Math.cos(mAngle * Math.PI / 180.0F) * mRadius);
-        final float y = (float) (mChildBounds.top + Math.sin(mAngle * Math.PI / 180.0F) * mRadius);
+        // Get angle point of a child
+        final float startX = (float) (mChildBounds.left + Math.cos(mAngle * Math.PI / 180.0F) * mRadius);
+        final float startY = (float) (mChildBounds.top + Math.sin(mAngle * Math.PI / 180.0F) * mRadius);
 
+        // Set counters
         mLeftCounter = mChildBounds.left;
         mTopCounter = mChildBounds.top;
+        // Calculate offsets
+        mOffsetX = (startX - mChildBounds.left) / mRadius;
+        mOffsetY = (startY - mChildBounds.top) / mRadius;
 
-        mOffsetX = (x - mChildBounds.left) / mRadius;
-        mOffsetY = (y - mChildBounds.top) / mRadius;
-
+        // Draw tint while bitmap contained in bounds and in angle area
         if (mAngle >= 0.0F && mAngle <= 90.0F) {
             while (mLeftCounter < mBounds.width() && mTopCounter < mBounds.height())
                 drawTintBitmap();
@@ -239,6 +237,17 @@ public class TintLayout extends FrameLayout {
         } else if (mAngle >= 270.0F && mAngle <= 360.0F) {
             while (mLeftCounter < mBounds.width() && mTopCounter > -mChildBounds.height())
                 drawTintBitmap();
+        }
+
+        // Calculate gradient
+        if (mColors != null) {
+            // Get angle point of a child
+            final float endX = (float) (mLeftCounter + Math.cos(mAngle * Math.PI / 180.0F) * mRadius);
+            final float endY = (float) (mTopCounter + Math.sin(mAngle * Math.PI / 180.0F) * mRadius);
+
+            mColorPaint.setShader(new LinearGradient(
+                    startX, startY, endX, endY, mColors, null, Shader.TileMode.CLAMP
+            ));
         }
 
         postInvalidate();

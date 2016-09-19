@@ -11,132 +11,74 @@ See the License for the specific language governing permissions and
 limitations under the License.
 -->
 
-
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:layout_gravity="center">
+             xmlns:app="http://schemas.android.com/apk/res-auto"
+             android:layout_width="match_parent"
+             android:layout_height="match_parent"
+             android:layout_gravity="center"
+             android:background="#000">
 
-    <LinearLayout
+    <devlight.io.library.TintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
-        android:weightSum="2">
+        app:tl_angle="45"
+        app:tl_colors="@array/logo_img_colors">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="1"
+            android:baselineAligned="false">
 
-            <devlight.io.library.TintLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                android:background="@color/background_start"
-                app:tl_angle="270"
-                app:tl_colors="@array/tint_layout_colors">
-
-                <devlight.io.sample.AgencyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/tint_title"
-                    android:textColor="@color/white"
-                    android:textSize="55sp"
-                    app:agencyFont="agency_bold" />
-
-            </devlight.io.library.TintLayout>
-
-            <devlight.io.library.TintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                android:background="@color/background_end"
-                app:tl_angle="0"
-                app:tl_colors="@array/tint_layout_colors">
+                android:layout_weight="0.3">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/src" />
-
-            </devlight.io.library.TintLayout>
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical|end"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_logo_img"/>
+            </FrameLayout>
 
         </LinearLayout>
+
+    </devlight.io.library.TintLayout>
+
+    <devlight.io.library.TintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:tl_angle="45"
+        app:tl_colors="@array/logo_txt_colors">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
             android:orientation="horizontal"
-            android:weightSum="2">
+            android:weightSum="1"
+            android:gravity="end"
+            android:baselineAligned="false">
 
-            <devlight.io.library.TintLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                android:background="@color/background_end"
-                app:tl_angle="180"
-                app:tl_colors="@array/tint_layout_colors">
+                android:layout_weight="0.7">
 
                 <ImageView
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:src="@drawable/src" />
-
-            </devlight.io.library.TintLayout>
-
-            <devlight.io.library.TintLayout
-                android:layout_width="0dp"
-                android:layout_height="match_parent"
-                android:layout_centerInParent="true"
-                android:layout_weight="1"
-                android:background="@color/background_start"
-                app:tl_angle="90"
-                app:tl_colors="@array/tint_layout_colors">
-
-                <devlight.io.sample.AgencyTextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:gravity="center"
-                    android:text="@string/layout_title"
-                    android:textColor="@color/white"
-                    android:textSize="55sp"
-                    app:agencyFont="agency_bold" />
-
-            </devlight.io.library.TintLayout>
+                    android:layout_height="100dp"
+                    android:layout_gravity="center_vertical"
+                    android:adjustViewBounds="true"
+                    android:src="@drawable/ic_logo_txt"/>
+            </FrameLayout>
 
         </LinearLayout>
-    </LinearLayout>
 
-    <!--<devlight.io.library.TintLayout-->
-        <!--android:id="@+id/tint_layout"-->
-        <!--android:layout_width="300dp"-->
-        <!--android:layout_height="300dp"-->
-        <!--android:layout_gravity="center"-->
-        <!--android:background="@drawable/circle"-->
-        <!--app:tl_colors="@array/tint_layout_colors">-->
-
-        <!--<devlight.io.sample.AgencyTextView-->
-            <!--android:layout_width="match_parent"-->
-            <!--android:layout_height="wrap_content"-->
-            <!--android:layout_gravity="center"-->
-            <!--android:gravity="center"-->
-            <!--android:text="@string/tint_layout_title"-->
-            <!--android:textColor="@color/white"-->
-            <!--android:textSize="50sp"-->
-            <!--app:agencyFont="agency_bold" />-->
-
-    <!--</devlight.io.library.TintLayout>-->
+    </devlight.io.library.TintLayout>
 
 </FrameLayout>

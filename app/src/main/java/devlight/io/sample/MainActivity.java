@@ -26,19 +26,5 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-//        final TintLayout tintLayout = (TintLayout) findViewById(R.id.tint_layout);
-//
-//        final ValueAnimator valueAnimator = ValueAnimator.ofFloat(0.0F, 360.0F);
-//        valueAnimator.setRepeatCount(ValueAnimator.INFINITE);
-//        valueAnimator.setRepeatMode(ValueAnimator.RESTART);
-//        valueAnimator.setDuration(10000);
-//        valueAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-//            @Override
-//            public void onAnimationUpdate(final ValueAnimator valueAnimator) {
-//                tintLayout.setAngle((Float) valueAnimator.getAnimatedValue());
-//            }
-//        });
-//        valueAnimator.start();
     }
 }

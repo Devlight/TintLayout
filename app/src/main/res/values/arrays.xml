@@ -1,13 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <array name="default_colors">
-        <item>@color/black</item>
-        <item>@android:color/transparent</item>
-    </array>
 
-    <array name="tint_layout_colors">
-        <item>@color/tint_start</item>
-        <item>@color/tint_end</item>
-    </array>
+    <string-array name="logo_img_colors">
+        <item>#a0ffa70b</item>
+        <item>#51ffa70b</item>
+        <item>#00ffa70b</item>
+    </string-array>
+
+    <string-array name="logo_txt_colors">
+        <item>#a0ffffff</item>
+        <item>#5affffff</item>
+        <item>#00ffffff</item>
+    </string-array>
 
 </resources>
