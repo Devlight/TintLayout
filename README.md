@@ -95,7 +95,7 @@ tintLayout.invalidateTint();
 
 And XML init:  
 ```xml
-    <devlight.io.library.TintLayout
+<devlight.io.library.TintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:tl_angle="45"
